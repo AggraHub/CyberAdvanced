@@ -1,7 +1,7 @@
 pipeline {
   
   environment {
-    REPOSITORY = "CyberAdvanced"
+    REPOSITORY = "cyberadvanced"
   } // end environment
   
   agent any

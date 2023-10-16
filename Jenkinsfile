@@ -2,6 +2,7 @@ pipeline {
   
   environment {
     REPOSITORY = "cyberadvanced"
+    GPG_PUBLIC_KEY = credentials('gpg')
   } // end environment
   
   agent any
@@ -12,7 +13,11 @@ pipeline {
         checkout scm
       } // end steps
     } // end stage "checkout scm"
-    
+    stage('gpg sign'){
+      steps {
+        sh "gpg --armor --detach-sign -u gpg ./Dockerfile"
+      }
+    }
     stage('Build image and tag with build number') {
       steps {
         script {
@@ -21,6 +26,11 @@ pipeline {
         } // end script
       } // end steps
     } // end stage "build image"
+    stage('verify signature'){
+      steps {
+        sh "gpg --verify <path-to-your-file.asc>"
+      }
+    }
     
     stage('Generate SBOM with syft') {
       steps {

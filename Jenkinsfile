@@ -2,7 +2,7 @@ pipeline {
   
   environment {
     REPOSITORY = "cyberadvanced"
-    GPG_PUBLIC_KEY = credentials("gpg")
+    GPG_PUBLIC_KEY = "GPGkey"
   } // end environment
   
   agent any

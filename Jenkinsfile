@@ -1,7 +1,7 @@
 pipeline {
     environment {
         REPOSITORY = "cyberadvanced"
-        GPG_PUBLIC_KEY = credentials('GPGkey')
+        //GPG_PUBLIC_KEY = credentials('GPGkey')
     }
     agent any
     stages {
@@ -12,7 +12,7 @@ pipeline {
         }
         stage('gpg sign') {
             steps {
-                sh 'gpg --armor --detach-sign -u ${GPG_PUBLIC_KEY} ./Dockerfile'
+                sh 'gpg --armor --detach-sign -u ${GPGkey} ./Dockerfile'
             }
         }
         stage('Build image and tag with build number') {

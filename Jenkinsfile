@@ -2,7 +2,6 @@ pipeline {
     environment {
         REPOSITORY = "cyberadvanced"
         GPG_PUBLIC_KEY = credentials('GPGkey')
-        GPG_password = credentials('GPGp')
     }
     agent any
     stages {

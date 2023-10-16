@@ -2,7 +2,7 @@ pipeline {
   
   environment {
     REPOSITORY = "cyberadvanced"
-    GPG_PUBLIC_KEY = credentials('gpg key')
+    GPG_PUBLIC_KEY = credentials("gpg")
   } // end environment
   
   agent any
@@ -15,7 +15,7 @@ pipeline {
     } // end stage "checkout scm"
     stage('gpg sign'){
       steps {
-        sh "gpg --armor --detach-sign -u 'gpg key' ./Dockerfile"
+        sh "gpg --armor --detach-sign -u gpg ./Dockerfile"
       }
     }
     stage('Build image and tag with build number') {
@@ -28,7 +28,7 @@ pipeline {
     } // end stage "build image"
     stage('verify signature'){
       steps {
-        sh "gpg --verify ./Dockerfile.asc>"
+        sh "gpg --verify ./Dockerfile.asc"
       }
     }
     
